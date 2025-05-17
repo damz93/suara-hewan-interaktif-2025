@@ -172,103 +172,103 @@ h1.animated-title {
   </div>
 
   <script>
-    const animals = [
-      { nama: "Alpaca", kategori: "Darat", img: "img/alpaca.png", suara: "sounds/alpaka.mp3" },
-      { nama: "Angsa", kategori: "Darat", img: "img/angsa.png", suara: "sounds/angsa.mp3" },
-      { nama: "Antelop", kategori: "Darat", img: "img/antelope.png", suara: "sounds/antelop.mp3" },
-      { nama: "Babi", kategori: "Darat", img: "img/babi.png", suara: "sounds/babi.mp3" },
-      { nama: "Badak", kategori: "Darat", img: "img/badak.png", suara: "sounds/badak.mp3" },
-      { nama: "Bebek", kategori: "Darat", img: "img/bebek.png", suara: "sounds/bebek.mp3" },
-      { nama: "Kucing", kategori: "Darat", img: "img/kucing.png", suara: "sounds/kucing.mp3" },
-      { nama: "Anjing", kategori: "Darat", img: "img/anjing.png", suara: "sounds/anjing.mp3" },
-      { nama: "Ayam Jantan", kategori: "Darat", img: "img/ayamjantan.png", suara: "sounds/ayamjantan.mp3" },
-      { nama: "Ayam Betina", kategori: "Darat", img: "img/ayambetina.png", suara: "sounds/ayambetina.mp3" },
-      { nama: "Sapi", kategori: "Darat", img: "img/sapi.png", suara: "sounds/sapi.mp3" },
-      { nama: "Domba", kategori: "Darat", img: "img/domba.png", suara: "sounds/domba.mp3" },
-      { nama: "Lumba-Lumba", kategori: "Laut", img: "img/lumba.png", suara: "sounds/lumba.mp3" }
-    ];
-    const aksesLevel = localStorage.getItem('aksesLevel') || 'trial';
+ const animals = [
+    { nama: "Alpaca", kategori: "Darat", img: "img/alpaca.png", suara: "sounds/alpaka.mp3" },
+    { nama: "Angsa", kategori: "Darat", img: "img/angsa.png", suara: "sounds/angsa.mp3" },
+    { nama: "Antelop", kategori: "Darat", img: "img/antelope.png", suara: "sounds/antelop.mp3" },
+    { nama: "Babi", kategori: "Darat", img: "img/babi.png", suara: "sounds/babi.mp3" },
+    { nama: "Badak", kategori: "Darat", img: "img/badak.png", suara: "sounds/badak.mp3" },
+    { nama: "Bebek", kategori: "Darat", img: "img/bebek.png", suara: "sounds/bebek.mp3" },
+    { nama: "Kucing", kategori: "Darat", img: "img/kucing.png", suara: "sounds/kucing.mp3" },
+    { nama: "Anjing", kategori: "Darat", img: "img/anjing.png", suara: "sounds/anjing.mp3" },
+    { nama: "Ayam Jantan", kategori: "Darat", img: "img/ayamjantan.png", suara: "sounds/ayamjantan.mp3" },
+    { nama: "Ayam Betina", kategori: "Darat", img: "img/ayambetina.png", suara: "sounds/ayambetina.mp3" },
+    { nama: "Sapi", kategori: "Darat", img: "img/sapi.png", suara: "sounds/sapi.mp3" },
+    { nama: "Domba", kategori: "Darat", img: "img/domba.png", suara: "sounds/domba.mp3" },
+    { nama: "Lumba-Lumba", kategori: "Laut", img: "img/lumba.png", suara: "sounds/lumba.mp3" }
+  ];
 
-    function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-        }
+  const aksesLevel = localStorage.getItem('aksesLevel') || 'trial';
 
-        let hewanDitampilkan = [];
-
-        if (aksesLevel === 'trial') {
-        shuffle(animals);                 // acak dulu
-        hewanDitampilkan = animals.slice(0, 3);  // ambil 3 hewan acak
-        } else if (aksesLevel === 'basic') {
-        shuffle(animals);                 // acak dulu
-        hewanDitampilkan = animals.slice(0, 5);  // ambil 5 hewan acak
-        } else if (aksesLevel === 'plus') {
-        animals.sort((a, b) => a.nama.localeCompare(b.nama)); // urut alfabet
-        hewanDitampilkan = animals;       // semua hewan
-        }
-
-
-    let quizMode = false;
-    let currentAnswer = null;
-
-    const animalContainer = document.getElementById('animalContainer');
-    const toggleModeBtn = document.getElementById('toggleModeBtn');
-    const searchInput = document.getElementById('searchInput');
-    const filterKategori = document.getElementById('filterKategori');
-    
-    hewanDitampilkan.forEach(h => {
-      const div = document.createElement('div');
-    //   const kategoriClass = animals.kategori.toLowerCase() === 'darat' ? 'category-darat' : 'category-laut';
-      const kategoriClass = h.kategori.toLowerCase() === 'darat' ? 'category-darat' : 'category-laut';
-
-      div.className = 'col-md-4';
-      div.innerHTML = `
-        <div class="card animal-card" data-nama="${h.nama}" data-suara="${h.suara}" tabindex="0" role="button" aria-label="Kartu hewan ${h.nama}">
-            <img src="${h.img}" alt="${h.nama}" class="card-img-top animal-img" />
-            <div class="card-body text-center">
-                <p class="category-badge ${kategoriClass}">${h.kategori}</p>
-            </div>
-            </div>
-
-      `;
-      animalContainer.appendChild(div);
-    });
-    // function renderAnimals(data) {
-    //   animalContainer.innerHTML = "";
-    //   data.forEach(animal => {
-    //     const col = document.createElement('div');
-    //     col.className = 'col-md-4 col-sm-6 mb-4';
-
-    //     // Tentukan kelas badge kategori
-    //     const kategoriClass = animal.kategori.toLowerCase() === 'darat' ? 'category-darat' : 'category-laut';
-
-    //     col.innerHTML = `
-    //       <div class="card animal-card" data-nama="${animal.nama}" data-suara="${animal.suara}" tabindex="0" role="button" aria-label="Kartu hewan ${animal.nama}">
-    //         <img src="${animal.img}" alt="${animal.nama}" class="card-img-top animal-img" />
-    //         <div class="card-body text-center">
-              
-    //           <p class="category-badge ${kategoriClass}">${animal.kategori}</p>
-    //         </div>
-    //       </div>
-    //     `;
-    //     animalContainer.appendChild(col);
-    //   });
-    // }
-
-    function filterAndSearchAnimals() {
-      const search = searchInput.value.toLowerCase();
-      const kategori = filterKategori.value;
-
-      const filtered = animals.filter(a =>
-        (kategori === "semua" || a.kategori === kategori) &&
-        a.nama.toLowerCase().includes(search)
-      );
-
-      renderAnimals(filtered);
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
     }
+    return array;
+  }
+
+  function getDisplayedAnimals() {
+    let list = [...animals];
+    if (aksesLevel === 'trial') return shuffle(list).slice(0, 3);
+    if (aksesLevel === 'basic') return shuffle(list).slice(0, 5);
+    if (aksesLevel === 'plus') return list.sort((a, b) => a.nama.localeCompare(b.nama));
+    return [];
+  }
+
+  let displayedAnimals = getDisplayedAnimals();
+  let quizMode = false;
+  let currentAnswer = null;
+
+  const animalContainer = document.getElementById('animalContainer');
+  const toggleModeBtn = document.getElementById('toggleModeBtn');
+  const searchInput = document.getElementById('searchInput');
+  const filterKategori = document.getElementById('filterKategori');
+
+  function renderAnimals(data) {
+    animalContainer.innerHTML = '';
+    data.forEach(h => {
+      const col = document.createElement('div');
+      col.className = 'col-lg-4 col-md-6 mb-4';
+
+      const kategoriClass = h.kategori.toLowerCase() === 'darat' ? 'category-darat' : (h.kategori.toLowerCase() === 'laut' ? 'category-laut' : '');
+
+      col.innerHTML = `
+        <div class="animal-card" data-nama="${h.nama}">
+          <img src="${h.img}" alt="${h.nama}" class="card-img-top">
+          <h5 class="mt-3">${h.nama}</h5>
+          <p class="category-badge ${kategoriClass}">${h.kategori}</p>
+        </div>
+      `;
+
+      col.querySelector('.animal-card').addEventListener('click', () => {
+        if (!quizMode) {
+          const audio = new Audio(h.suara);
+          audio.play();
+        }
+        // Jika nanti diaktifkan quizMode, bisa dikembangkan
+      });
+
+      animalContainer.appendChild(col);
+    });
+  }
+
+  function applyFilters() {
+    const keyword = searchInput.value.trim().toLowerCase();
+    const kategori = filterKategori.value;
+
+    const hasilFilter = displayedAnimals.filter(h =>
+      (kategori === 'semua' || h.kategori.toLowerCase() === kategori.toLowerCase()) &&
+      h.nama.toLowerCase().includes(keyword)
+    );
+
+    renderAnimals(hasilFilter);
+  }
+
+  // Event listeners
+  searchInput.addEventListener('input', applyFilters);
+  filterKategori.addEventListener('change', applyFilters);
+  toggleModeBtn.addEventListener('click', () => {
+    quizMode = !quizMode;
+    toggleModeBtn.textContent = quizMode ? "📚 Mode Belajar" : "🎮 Mode Kuis";
+    // Nanti bisa tambahkan logic quizMode
+    applyFilters(); // tetap render ulang sesuai mode
+  });
+
+  // Render awal
+  applyFilters();
+
+
 
     toggleModeBtn.addEventListener('click', function () {
   quizMode = !quizMode;
@@ -352,8 +352,8 @@ animalContainer.addEventListener('click', e => {
 
 
     // Search & filter events
-    searchInput.addEventListener('input', filterAndSearchAnimals);
-    filterKategori.addEventListener('change', filterAndSearchAnimals);
+    // searchInput.addEventListener('input', filterAndSearchAnimals);
+    // filterKategori.addEventListener('change', filterAndSearchAnimals);
 
     // Initial render
     //renderAnimals(animals);
