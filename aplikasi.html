@@ -12,7 +12,6 @@
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #ffe3e3, #ffd6a5, #fdffb6, #caffbf);
-
       color: #333;
       min-height: 100vh;
       margin: 0;
@@ -21,15 +20,14 @@
 
     /* Menu Sticky */
     #fixedMenu {
-      position: sticky;
-      top: 0;
-      z-index: 1100;
-      background-color: #fff;
-      padding: 12px 24px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      border-bottom: 3px solid #f8b500;
-      border-radius: 0 0 15px 15px;
-      margin-bottom: 1.5rem;
+      width: 100vw;
+      margin: 0;
+      padding-left: 0;
+      padding-right: 0;
+      left: 0;
+      right: 0;
+      z-index: 1030;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     #fixedMenu .form-control,
@@ -41,6 +39,7 @@
       transition: border-color 0.3s ease;
       border: 2px solid #f8b500;
     }
+
     #fixedMenu .form-control:focus,
     #fixedMenu .form-select:focus {
       border-color: #e67e00;
@@ -57,19 +56,23 @@
       transition: background 0.4s ease, transform 0.2s ease;
       box-shadow: 0 3px 8px rgba(248, 181, 0, 0.5);
     }
+
     #toggleModeBtn:hover {
       background: linear-gradient(45deg, #e67e00, #f8b500);
       transform: scale(1.05);
       box-shadow: 0 6px 15px rgba(230, 126, 0, 0.7);
     }
 
-    h1.text-primary {
-      text-shadow: 1px 1px 4px #d18c00aa;
+    h3.animated-title {
+      font-size: 2rem;
+      color: #173a70;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      animation: bounce 2s infinite;
+      user-select: none;
       font-weight: 700;
       margin-bottom: 2rem;
     }
 
-    /* Animal Cards */
     .animal-card {
       background-color: #fff;
       border-radius: 20px;
@@ -82,8 +85,9 @@
       align-items: center;
       padding-bottom: 1rem;
     }
+
     .animal-card:hover {
-      transform: scale(1.07);
+      transform: scale(1.09);
       box-shadow: 0 10px 20px rgba(0,0,0,0.25);
       z-index: 5;
     }
@@ -96,7 +100,7 @@
       padding: 15px 10px 0 10px;
       border-bottom: 2px solid #f8b500;
       border-radius: 20px 20px 0 0;
-      background: #fff8d4;
+      background: #f5ecc0;
     }
 
     .animal-card p.category-badge {
@@ -109,69 +113,84 @@
       user-select: none;
       width: fit-content;
     }
+
     .category-darat {
-      background-color: #27ae60; /* hijau */
-    }
-    .category-laut {
-      background-color: #2980b9; /* biru */
+      background-color: #27ae60;
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .card-img-top {
-        height: 130px;
-      }
+    .category-air {
+      background-color: #2980b9;
+    }
+    .category-udara {
+    background-color: #462f50; /* ungu atau bisa pilih warna lain */
+    }
+
+    @media (max-width: 991.98px) {
       #fixedMenu {
+        margin-bottom: 150px;
         padding: 10px 16px;
       }
+
       #toggleModeBtn {
         font-size: 1rem;
         padding: 8px 0;
       }
+
+      .card-img-top {
+        height: 130px;
+      }
     }
+
     @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @media (max-width: 768px) {
+  .main-content {
+    margin-top: 250px !important; /* lebih besar dari tinggi menu sticky di mobile */
+  }
 }
 
-h1.animated-title {
-  font-size: 3rem;
-  color: #173a70; /* Bootstrap primary */
-  text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-  animation: bounce 2s infinite;
-  user-select: none;
+@media (min-width: 769px) {
+  .main-content {
+    margin-top: 150px !important; /* default margin untuk laptop/desktop */
+  }
 }
-
   </style>
 </head>
 <body>
-  <div class="container py-4">
-    <h1 class="text-center fw-bold animated-title">🐾 Suara Hewan Interaktif</h1>
-
-
-    <!-- Menu Sticky -->
-    <div id="fixedMenu" class="container mb-4">
-      <div class="row g-2 justify-content-center align-items-center">
-        <div class="col-md-4 col-sm-12">
-          <input type="text" id="searchInput" autocomplete="off" class="form-control" placeholder="🔍 Cari hewan...">
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <select id="filterKategori" class="form-select">
-            <option value="semua">🌍 Semua Kategori</option>
-            <option value="Darat">🐾 Darat</option>
-            <option value="Laut">🌊 Laut</option>
-            <option value="Udara">🪽 Udara</option>
-          </select>
-        </div>
-        <div class="col-md-3 col-sm-6 text-sm-end text-center">
-          <button id="toggleModeBtn" class="btn btn-warning w-100">🎮 Mode Kuis</button>
-        </div>
-      </div>
+  <!-- Menu Sticky (HARUS DI LUAR container utama!) -->
+<div id="fixedMenu" class="container-fluid fixed-top bg-light py-3">
+  <h3 class="text-center fw-bold animated-title">🐾 Suara Hewan Interaktif</h3>
+  <div class="row g-2 justify-content-center align-items-center">
+    <div class="col-md-4 col-sm-12">
+      <input type="text" id="searchInput" autocomplete="off" class="form-control" placeholder="🔍 Cari hewan...">
     </div>
-
-    <div id="animalContainer" class="row"></div>
+    <div class="col-md-3 col-sm-6">
+      <select id="filterKategori" class="form-select">
+        <option value="semua">🌍 Semua Kategori</option>
+        <option value="Darat">🐾 Darat</option>
+        <option value="Air">🌊 Air</option>
+        <option value="Udara">🪽 Udara</option>
+      </select>
+    </div>
+    <div class="col-md-3 col-sm-6 text-sm-end text-center">
+      <button id="toggleModeBtn" class="btn btn-warning w-100">🎮 Mode Kuis</button>
+    </div>
   </div>
+</div>
 
+<!-- Konten utama -->
+<div class="container py-4 main-content">
+
+  <!-- Konten lain masuk sini -->
+  
+  
+  
+  
+  <div id="animalContainer" class="row"></div>
+  
+</div>
   <script>
  const animals = [
     { nama: "Alpaca", kategori: "Darat", img: "img/alpaca.png", suara: "sounds/alpaka.mp3" },
@@ -186,7 +205,7 @@ h1.animated-title {
     { nama: "Ayam Betina", kategori: "Darat", img: "img/ayambetina.png", suara: "sounds/ayambetina.mp3" },
     { nama: "Sapi", kategori: "Darat", img: "img/sapi.png", suara: "sounds/sapi.mp3" },
     { nama: "Domba", kategori: "Darat", img: "img/domba.png", suara: "sounds/domba.mp3" },
-    { nama: "Lumba-Lumba", kategori: "Laut", img: "img/lumba.png", suara: "sounds/lumba.mp3" }
+    { nama: "Lumba-Lumba", kategori: "Air", img: "img/lumba.png", suara: "sounds/lumba.mp3" }
   ];
 
   const aksesLevel = localStorage.getItem('aksesLevel') || 'trial';
@@ -201,8 +220,8 @@ h1.animated-title {
 
   function getDisplayedAnimals() {
     let list = [...animals];
-    if (aksesLevel === 'trial') return shuffle(list).slice(0, 3);
-    if (aksesLevel === 'basic') return shuffle(list).slice(0, 5);
+    if (aksesLevel === 'trial') return shuffle(list).slice(0, 6);
+    if (aksesLevel === 'basic') return shuffle(list).slice(0, 12);
     if (aksesLevel === 'plus') return list.sort((a, b) => a.nama.localeCompare(b.nama));
     return [];
   }
@@ -217,147 +236,99 @@ h1.animated-title {
   const filterKategori = document.getElementById('filterKategori');
 
   function renderAnimals(data) {
-    animalContainer.innerHTML = '';
-    data.forEach(h => {
-      const col = document.createElement('div');
-      col.className = 'col-lg-4 col-md-6 mb-4';
+  animalContainer.innerHTML = '';
+  data.forEach(h => {
+    const col = document.createElement('div');
+    col.className = 'col-lg-2 col-md-6 mt-3 mb-4';
 
-      const kategoriClass = h.kategori.toLowerCase() === 'darat' ? 'category-darat' : (h.kategori.toLowerCase() === 'laut' ? 'category-laut' : '');
+    const kategoriClass = 
+  h.kategori.toLowerCase() === 'darat' ? 'category-darat' :
+  h.kategori.toLowerCase() === 'air' ? 'category-air' :
+  h.kategori.toLowerCase() === 'laut' ? 'category-laut' :
+  h.kategori.toLowerCase() === 'udara' ? 'category-udara' :
+  '';
 
-      col.innerHTML = `
-        <div class="animal-card" data-nama="${h.nama}">
-          <img src="${h.img}" alt="${h.nama}" class="card-img-top">
-          <h5 class="mt-3">${h.nama}</h5>
-          <p class="category-badge ${kategoriClass}">${h.kategori}</p>
-        </div>
-      `;
+    col.innerHTML = `
+      <div class="animal-card" data-nama="${h.nama}">
+        <img src="${h.img}" class="card-img-top" alt="${h.nama}" />
+        <!--<h5 class="mt-3 fw-bold">${h.nama}</h5>-->
+        <p class="mt-3 category-badge ${kategoriClass}">${h.kategori}</p>
+      </div>
+    `;
 
-      col.querySelector('.animal-card').addEventListener('click', () => {
-        if (!quizMode) {
-          const audio = new Audio(h.suara);
-          audio.play();
+    // URL sound benar & salah (ganti kalau mau pakai lokal)
+    const soundBenar = new Audio('sounds/benar.mp3');
+    const soundSalah = new Audio('sounds/salah.mp3');
+    col.querySelector('.animal-card').addEventListener('click', () => {
+        if (quizMode) {
+            const selected = h.nama;
+            if (selected === currentAnswer.nama) {
+            soundBenar.play();
+            Swal.fire('🎉 Benar!', `Kamu berhasil menebak suara ${h.nama}!`, 'success').then(() => {
+                soundBenar.pause();
+                soundBenar.currentTime = 0;
+                startQuiz();
+            });
+            } else {
+            soundSalah.play();
+            Swal.fire('😞 Salah!', `Itu bukan suara ${h.nama}. Coba lagi ya!`, 'error').then(() => {
+                soundSalah.pause();
+                soundSalah.currentTime = 0;
+            });
+            }
+        } else {
+            const audio = new Audio(h.suara);
+            audio.play();
         }
-        // Jika nanti diaktifkan quizMode, bisa dikembangkan
-      });
-
-      animalContainer.appendChild(col);
-    });
-  }
-
-  function applyFilters() {
-    const keyword = searchInput.value.trim().toLowerCase();
-    const kategori = filterKategori.value;
-
-    const hasilFilter = displayedAnimals.filter(h =>
-      (kategori === 'semua' || h.kategori.toLowerCase() === kategori.toLowerCase()) &&
-      h.nama.toLowerCase().includes(keyword)
-    );
-
-    renderAnimals(hasilFilter);
-  }
-
-  // Event listeners
-  searchInput.addEventListener('input', applyFilters);
-  filterKategori.addEventListener('change', applyFilters);
-  toggleModeBtn.addEventListener('click', () => {
-    quizMode = !quizMode;
-    toggleModeBtn.textContent = quizMode ? "📚 Mode Belajar" : "🎮 Mode Kuis";
-    // Nanti bisa tambahkan logic quizMode
-    applyFilters(); // tetap render ulang sesuai mode
-  });
-
-  // Render awal
-  applyFilters();
+        });
 
 
-
-    toggleModeBtn.addEventListener('click', function () {
-  quizMode = !quizMode;
-
-  if (quizMode) {
-    this.textContent = '🔊 Mode Suara';
-    Swal.fire('🎮 Mode Kuis Aktif', 'Tebak suara dari gambar!', 'info');
-    generateQuiz();
-  } else {
-    this.textContent = '🎮 Mode Kuis';
-    Swal.fire('🔊 Kembali ke Mode Suara', 'Klik gambar untuk dengarkan suara.', 'info');
-    currentAnswer = null;
-  }
-});
-
-function generateQuiz() {
-  const allCards = document.querySelectorAll('.animal-card');
-  if (allCards.length === 0) return;
-
-  const randomCard = allCards[Math.floor(Math.random() * allCards.length)];
-  currentAnswer = {
-    nama: randomCard.getAttribute('data-nama'),
-    suara: randomCard.getAttribute('data-suara'),
-  };
-
-  // Putar suara quiz
-  if(window.quizAudio) {
-    window.quizAudio.pause();
-  }
-  window.quizAudio = new Audio(currentAnswer.suara);
-  window.quizAudio.play();
-
-  Swal.fire({
-    title: 'Tebak Suara Hewan',
-    text: 'Klik gambar hewan yang cocok dengan suara ini!',
-    icon: 'question',
-    timer: 5000,
-    timerProgressBar: true,
-    showConfirmButton: false,
-    didOpen: () => {
-      window.quizAudio.play();
-    }
+    animalContainer.appendChild(col);
   });
 }
 
-// URL sound benar & salah (ganti kalau mau pakai lokal)
-const soundBenar = new Audio('sounds/benar.mp3');
-const soundSalah = new Audio('sounds/salah.mp3');
+function startQuiz() {
+  quizMode = true;
+  toggleModeBtn.textContent = '❌ Keluar Mode Kuis';
+  const quizAnimals = shuffle([...displayedAnimals]);
+  currentAnswer = quizAnimals[Math.floor(Math.random() * quizAnimals.length)];
+  const audio = new Audio(currentAnswer.suara);
+  setTimeout(() => audio.play(), 500);
+  renderAnimals(quizAnimals);
+}
 
-animalContainer.addEventListener('click', e => {
-  let card = e.target.closest('.animal-card');
-  if (!card) return;
+function exitQuiz() {
+  quizMode = false;
+  toggleModeBtn.textContent = '🎮 Mode Kuis';
+  currentAnswer = null;
+  renderAnimals(displayedAnimals);
+}
 
-  if (quizMode) {
-    const clickedName = card.getAttribute('data-nama');
-    if (clickedName === currentAnswer.nama) {
-      soundBenar.play();
-      Swal.fire('🎉 Benar!', `Kamu berhasil menebak suara ${clickedName}!`, 'success').then(() => {
-        soundBenar.pause();
-        soundBenar.currentTime = 0;
-        generateQuiz();
-      });
-    } else {
-      soundSalah.play();
-      Swal.fire('😞 Salah!', `Itu bukan suara ${clickedName}. Coba lagi ya!`, 'error').then(() => {
-      soundSalah.pause();
-        soundSalah.currentTime = 0;
-        
-      });
-    }
+toggleModeBtn.addEventListener('click', () => {
+  if (!quizMode) {
+    startQuiz();
   } else {
-    // mode biasa play suara saat klik gambar
-    const suaraSrc = card.getAttribute('data-suara');
-    if (suaraSrc) {
-      const audio = new Audio(suaraSrc);
-      audio.play();
-    }
+    exitQuiz();
   }
 });
 
+searchInput.addEventListener('input', () => {
+  const keyword = searchInput.value.toLowerCase();
+  const filtered = displayedAnimals.filter(h => h.nama.toLowerCase().includes(keyword));
+  renderAnimals(filtered);
+});
 
+filterKategori.addEventListener('change', () => {
+  const selectedKategori = filterKategori.value;
+  if (selectedKategori === 'semua') {
+    renderAnimals(displayedAnimals);
+  } else {
+    const filtered = displayedAnimals.filter(h => h.kategori.toLowerCase() === selectedKategori.toLowerCase());
+    renderAnimals(filtered);
+  }
+});
 
-    // Search & filter events
-    // searchInput.addEventListener('input', filterAndSearchAnimals);
-    // filterKategori.addEventListener('change', filterAndSearchAnimals);
-
-    // Initial render
-    //renderAnimals(animals);
+renderAnimals(displayedAnimals);
   </script>
 </body>
 </html>
