@@ -1,0 +1,79 @@
+Berikut adalah daftar nama hewan dari data yang diberikan dalam bentuk list:
+
+- Alpaca
+- Anjing
+- Angsa
+- Antelop
+- Ayam Betina
+- Ayam Jantan
+- Badak
+- Babi
+- Bebek
+- Berang
+- Beruang
+- Biawak
+- Bintang Laut
+- Bison
+- Buaya
+- Burung Cendrawasih
+- Burung Gagak
+- Burung Hantu
+- Burung Jalak
+- Burung Kakatua
+- Burung Kolibri
+- Cicak
+- Elang
+- Gajah
+- Harimau
+- Hiu
+- Hyena
+- Iguana
+- Ikan Arwana
+- Ikan Cupang
+- Jerapah
+- Kanguru
+- Katak Pohon
+- Kadal
+- Kalajengking
+- Kakatua
+- Kelelawar
+- Kelinci
+- Kepiting
+- Kerbau
+- Kera
+- King-kong
+- Koala
+- Kodok
+- Kolibri
+- Komodo
+- Kuda
+- Kuda Nil
+- Kucing
+- Kupukupu
+- Landak
+- Lalat
+- Lebah
+- Lele
+- Lumba-Lumba
+- Macan Tutul
+- Merpati
+- Musang
+- Nyamuk
+- Panda
+- Paus Biru
+- Paus Bungkuk
+- Paus Kepala Busur
+- Pemakan Semut
+- Penguin
+- Rakun
+- Rusa
+- Serigala
+- Singa
+- Sapi
+- Tikus
+- Tokek
+- Ubar-Ubar
+- Ular
+- Unta
+- Yak
+- Zebra
