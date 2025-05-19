@@ -1,334 +1,360 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Suara Hewan Interaktif</title>
-  <link rel="icon" href="icon.jpg" type="image/png" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #ffe3e3, #ffd6a5, #fdffb6, #caffbf);
-      color: #333;
-      min-height: 100vh;
-      margin: 0;
-      padding-bottom: 50px;
-    }
-
-    /* Menu Sticky */
-    #fixedMenu {
-      width: 100vw;
-      margin: 0;
-      padding-left: 0;
-      padding-right: 0;
-      left: 0;
-      right: 0;
-      z-index: 1030;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    #fixedMenu .form-control,
-    #fixedMenu .form-select {
-      border-radius: 25px;
-      padding-left: 1.25rem;
-      padding-right: 1.25rem;
-      font-size: 1rem;
-      transition: border-color 0.3s ease;
-      border: 2px solid #f8b500;
-    }
-
-    #fixedMenu .form-control:focus,
-    #fixedMenu .form-select:focus {
-      border-color: #e67e00;
-      box-shadow: 0 0 8px #e67e00aa;
-      outline: none;
-    }
-
-    #toggleModeBtn {
-      border-radius: 25px;
-      background: linear-gradient(45deg, #f8b500, #fceabb);
-      border: none;
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: background 0.4s ease, transform 0.2s ease;
-      box-shadow: 0 3px 8px rgba(248, 181, 0, 0.5);
-    }
-
-    #toggleModeBtn:hover {
-      background: linear-gradient(45deg, #e67e00, #f8b500);
-      transform: scale(1.05);
-      box-shadow: 0 6px 15px rgba(230, 126, 0, 0.7);
-    }
-
-    h3.animated-title {
-      font-size: 1.93rem;
-      color: #c4722f;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-      animation: bounce 2s infinite;
-      user-select: none;
-      font-weight: 700;
-      margin-bottom: 1.2rem;
-    }
-
-    .animal-card {
-      background-color: #fff;
-      border-radius: 20px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-bottom: 1rem;
-    }
-
-    .animal-card:hover {
-      transform: scale(1.09);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
-      z-index: 5;
-    }
-
-    .card-img-top {
-      width: 93%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center;
-      padding: 15px 10px 0 10px;
-      border-bottom: 2px solid #f8b500;
-      border-radius: 20px 20px 0 0;
-      background: #f5ecc0;
-    }
-
-    .animal-card p.category-badge {
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin-top: 0.5rem;
-      padding: 4px 12px;
-      border-radius: 20px;
-      color: #fff;
-      user-select: none;
-      width: fit-content;
-    }
-
-    .category-darat {
-      background-color: #27ae60;
-    }
-
-    .category-air {
-      background-color: #2980b9;
-    }
-    .category-udara {
-    background-color: #462f50; /* ungu atau bisa pilih warna lain */
-    }
-
-    @media (max-width: 991.98px) {
-      #fixedMenu {
-        margin-bottom: 150px;
-        padding: 10px 16px;
-      }
-
-      #toggleModeBtn {
-        font-size: 1rem;
-        padding: 8px 0;
-      }
-
-      .card-img-top {
-        height: 130px;
-      }
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    @media (max-width: 768px) {
-  .main-content {
-    margin-top: 250px !important; /* lebih besar dari tinggi menu sticky di mobile */
-  }
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Suara Hewan Interaktif</title>
+		<link rel="icon" href="icon.jpg" type="image/png" />
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+		<style>
+      .tooltip-wrapper {
+  position: relative;
+  display: inline-block;
 }
 
-@media (min-width: 769px) {
-  .main-content {
-    margin-top: 150px !important; /* default margin untuk laptop/desktop */
-  }
-}
-  </style>
-</head>
-<body>
-  <!-- Menu Sticky (HARUS DI LUAR container utama!) -->
-<div id="fixedMenu" class="container-fluid fixed-top bg-light py-3">
-  <h3 class="text-center fw-bold animated-title">🐾 Suara Hewan Interaktif</h3>
-  <div class="row g-2 justify-content-center align-items-center">
-    <div class="col-md-4 col-sm-12">
-      <input type="text" id="searchInput" autocomplete="off" class="form-control" placeholder="🔍 Cari hewan...">
-    </div>
-    <div class="col-md-3 col-sm-6">
-      <select id="filterKategori" class="form-select">
-        <option value="semua">🌍 Semua Kategori</option>
-        <option value="Darat">🐾 Darat</option>
-        <option value="Air">🌊 Air</option>
-        <option value="Udara">🪽 Udara</option>
-      </select>
-    </div>
-    <div class="col-md-3 col-sm-6 text-sm-end text-center">
-      <button id="toggleModeBtn" class="btn btn-warning w-100">🎮 Mode Kuis</button>
-    </div>
-  </div>
-</div>
-
-<!-- Konten utama -->
-<div class="container py-4 main-content">
-
-  <!-- Konten lain masuk sini -->
-  
-  
-  
-  
-  <div id="animalContainer" class="row"></div>
-  
-</div>
-  <script>
- let animals = [];
-
-
-  fetch('animals.json')
-  .then(res => res.json())
-  .then(data => {
-    animals = data;
-    displayedAnimals = getDisplayedAnimals(); // panggil ulang setelah data masuk
-    renderAnimals(displayedAnimals);         // tampilkan ke halaman
-  })
-  .catch(err => {
-    console.error('Gagal memuat data hewan:', err);
-  });
-
-  const aksesLevel = localStorage.getItem('aksesLevel') || 'trial';
-
-  function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-
-  function getDisplayedAnimals() {
-    let list = [...animals];
-    if (aksesLevel === 'trial') return shuffle(list).slice(0, 6);
-    if (aksesLevel === 'basic') return shuffle(list).slice(0, 12);
-    if (aksesLevel === 'plus') return list.sort((a, b) => a.nama.localeCompare(b.nama));
-    return [];
-  }
-
-  let displayedAnimals = getDisplayedAnimals();
-  let quizMode = false;
-  let currentAnswer = null;
-
-  const animalContainer = document.getElementById('animalContainer');
-  const toggleModeBtn = document.getElementById('toggleModeBtn');
-  const searchInput = document.getElementById('searchInput');
-  const filterKategori = document.getElementById('filterKategori');
-
-  function renderAnimals(data) {
-  animalContainer.innerHTML = '';
-  data.forEach(h => {
-    const col = document.createElement('div');
-    col.className = 'col-lg-2 col-md-6 mt-3 mb-4';
-
-    const kategoriClass = 
-  h.kategori.toLowerCase() === 'darat' ? 'category-darat' :
-  h.kategori.toLowerCase() === 'air' ? 'category-air' :
-  h.kategori.toLowerCase() === 'laut' ? 'category-laut' :
-  h.kategori.toLowerCase() === 'udara' ? 'category-udara' :
-  '';
-
-    col.innerHTML = `
-      <div class="animal-card" data-nama="${h.nama}">
-        <img src="${h.img}" class="card-img-top" alt="${h.nama}" />
-        <h5 class="mt-3 fw-bold">${h.nama}</h5>
-        <p class="mt-3 category-badge ${kategoriClass}">${h.kategori}</p>
-      </div>
-    `;
-
-    // URL sound benar & salah (ganti kalau mau pakai lokal)
-    const soundBenar = new Audio('sounds/benar.mp3');
-    const soundSalah = new Audio('sounds/salah.mp3');
-    col.querySelector('.animal-card').addEventListener('click', () => {
-        if (quizMode) {
-            const selected = h.nama;
-            if (selected === currentAnswer.nama) {
-            soundBenar.play();
-            Swal.fire('🎉 Benar!', `Kamu berhasil menebak suara ${h.nama}!`, 'success').then(() => {
-                soundBenar.pause();
-                soundBenar.currentTime = 0;
-                startQuiz();
-            });
-            } else {
-            soundSalah.play();
-            Swal.fire('😞 Salah!', `Itu bukan suara ${h.nama}. Coba lagi ya!`, 'error').then(() => {
-                soundSalah.pause();
-                soundSalah.currentTime = 0;
-            });
-            }
-        } else {
-            const audio = new Audio(h.suara);
-            audio.pause();
-            audio.currentTime = 0;
-            audio.play();
-        }
-        });
-
-
-    animalContainer.appendChild(col);
-  });
+.tooltip-wrapper:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(51, 51, 51, 0.9);
+  color: #fff;
+  padding: 0px 3px;
+  border-radius: 4px;
+  z-index: 30;
+  max-width: 100%;
+  white-space: normal;
+  font-size: 0.75rem;
+  pointer-events: none;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
 }
 
-function startQuiz() {
-  quizMode = true;
-  toggleModeBtn.textContent = '❌ Keluar Mode Kuis';
-  const quizAnimals = shuffle([...displayedAnimals]);
-  currentAnswer = quizAnimals[Math.floor(Math.random() * quizAnimals.length)];
-  const audio = new Audio(currentAnswer.suara);
-  setTimeout(() => audio.play(), 500);
-  renderAnimals(quizAnimals);
+.tooltip-wrapper::after {
+  opacity: 0;
+  pointer-events: none;
 }
-
-function exitQuiz() {
-  quizMode = false;
-  toggleModeBtn.textContent = '🎮 Mode Kuis';
-  currentAnswer = null;
-  renderAnimals(displayedAnimals);
+.tooltip-wrapper:hover::after {
+  opacity: 1;
 }
-
-toggleModeBtn.addEventListener('click', () => {
-  if (!quizMode) {
-    startQuiz();
-  } else {
-    exitQuiz();
-  }
-});
-
-searchInput.addEventListener('input', () => {
-  const keyword = searchInput.value.toLowerCase();
-  const filtered = displayedAnimals.filter(h => h.nama.toLowerCase().includes(keyword));
-  renderAnimals(filtered);
-});
-
-filterKategori.addEventListener('change', () => {
-  const selectedKategori = filterKategori.value;
-  if (selectedKategori === 'semua') {
-    renderAnimals(displayedAnimals);
-  } else {
-    const filtered = displayedAnimals.filter(h => h.kategori.toLowerCase() === selectedKategori.toLowerCase());
-    renderAnimals(filtered);
-  }
-});
-
-renderAnimals(displayedAnimals);
-  </script>
-</body>
+			body {
+			font-family: 'Poppins', sans-serif;
+			background: linear-gradient(135deg, #ffe3e3, #ffd6a5, #fdffb6, #caffbf);
+			color: #333;
+			min-height: 100vh;
+			margin: 0;
+			padding-bottom: 50px;
+			}
+			/* Menu Sticky */
+			#fixedMenu {
+			width: 100vw;
+			margin: 0;
+			padding-left: 0;
+			padding-right: 0;
+			left: 0;
+			right: 0;
+			z-index: 1030;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			}
+			#fixedMenu .form-control,
+			#fixedMenu .form-select {
+			border-radius: 25px;
+			padding-left: 1.25rem;
+			padding-right: 1.25rem;
+			font-size: 1rem;
+			transition: border-color 0.3s ease;
+			border: 2px solid #f8b500;
+			}
+			#fixedMenu .form-control:focus,
+			#fixedMenu .form-select:focus {
+			border-color: #e67e00;
+			box-shadow: 0 0 8px #e67e00aa;
+			outline: none;
+			}
+			#toggleModeBtn {
+			border-radius: 25px;
+			background: linear-gradient(45deg, #f8b500, #fceabb);
+			border: none;
+			font-weight: 600;
+			font-size: 1.1rem;
+			transition: background 0.4s ease, transform 0.2s ease;
+			box-shadow: 0 3px 8px rgba(248, 181, 0, 0.5);
+			}
+			#toggleModeBtn:hover {
+			background: linear-gradient(45deg, #e67e00, #f8b500);
+			transform: scale(1.05);
+			box-shadow: 0 6px 15px rgba(230, 126, 0, 0.7);
+			}
+			h3.animated-title {
+			font-size: 1.93rem;
+			color: #c4722f;
+			text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+			animation: bounce 2s infinite;
+			user-select: none;
+			font-weight: 700;
+			margin-bottom: 1.2rem;
+			}
+			.animal-card {
+			background-color: #fff;
+			border-radius: 20px;
+			box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+			overflow: hidden;
+			cursor: pointer;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding-bottom: 1rem;
+			}
+			.animal-card:hover {
+			transform: scale(1.05); /* Dikurangi untuk mencegah tumpang tindih */
+			box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+			z-index: 5;
+			}
+			.card-img-top {
+			width: 100%;
+			height: auto;
+			max-height: 150px;
+			object-fit: contain;
+			object-position: center;
+			padding: 15px 10px 0 10px;
+			border-bottom: 2px solid #f8b500;
+			border-radius: 20px 20px 0 0;
+			background: #f5ecc0;
+			position: relative;
+			}
+			
+			.animal-card p.category-badge {
+			font-weight: 600;
+			font-size: 0.9rem;
+			margin-top: 0.5rem;
+			padding: 4px 12px;
+			border-radius: 20px;
+			color: #fff;
+			user-select: none;
+			width: fit-content;
+			}
+			.category-darat {
+			background-color: #27ae60;
+			}
+			.category-air {
+			background-color: #2980b9;
+			}
+			.category-udara {
+			background-color: #6b7280; /* Abu-abu untuk kontras lebih baik */
+			text-shadow: 0 0 2px rgba(0, 0, 0, 0.3); /* Meningkatkan keterbacaan */
+			}
+			.category-unknown {
+			background-color: #9ca3af; /* Abu-abu netral untuk kategori tidak valid */
+			}
+			@media (max-width: 991.98px) {
+			#fixedMenu {
+			margin-bottom: 150px;
+			padding: 10px 16px;
+			}
+			#toggleModeBtn {
+			font-size: 1rem;
+			padding: 8px 0;
+			}
+			.card-img-top {
+			max-height: 130px; /* Mengganti height: 130px */
+			}
+			.animal-card:hover {
+			transform: scale(1.03); /* Skala lebih kecil untuk mobile */
+			}
+			}
+			@keyframes bounce {
+			0%, 100% { transform: translateY(0); }
+			50% { transform: translateY(-10px); }
+			}
+			@media (max-width: 768px) {
+			.main-content {
+			margin-top: 250px !important; /* lebih besar dari tinggi menu sticky di mobile */
+			}
+			}
+			@media (min-width: 769px) {
+			.main-content {
+			margin-top: 150px !important; /* default margin untuk laptop/desktop */
+			}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Menu Sticky (HARUS DI LUAR container utama!) -->
+		<div id="fixedMenu" class="container-fluid fixed-top bg-light py-3">
+			<h3 class="text-center fw-bold animated-title">🐾 Suara Hewan Interaktif</h3>
+			<div class="row g-2 justify-content-center align-items-center">
+				<div class="col-md-4 col-sm-12">
+					<input type="text" id="searchInput" autocomplete="off" class="form-control" placeholder="🔍 Cari hewan...">
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<select id="filterKategori" class="form-select">
+						<option value="semua">🌍 Semua Kategori</option>
+						<option value="Darat">🐾 Darat</option>
+						<option value="Air">🌊 Air</option>
+						<option value="Udara">🪽 Udara</option>
+					</select>
+				</div>
+				<div class="col-md-3 col-sm-6 text-sm-end text-center">
+					<button id="toggleModeBtn" class="btn btn-warning w-100">🎮 Mode Kuis</button>
+				</div>
+			</div>
+		</div>
+		<!-- Konten utama -->
+		<div class="container py-4 main-content">
+			<!-- Konten lain masuk sini -->
+			<div id="animalContainer" class="row"></div>
+		</div>
+		<script>
+			let animals = [];
+			
+			
+			 fetch('animals.json')
+			 .then(res => res.json())
+			 .then(data => {
+			   animals = data;
+			   displayedAnimals = getDisplayedAnimals(); // panggil ulang setelah data masuk
+			   renderAnimals(displayedAnimals);         // tampilkan ke halaman
+			 })
+			 .catch(err => {
+			   console.error('Gagal memuat data hewan:', err);
+			 });
+			
+			 const aksesLevel = localStorage.getItem('aksesLevel') || 'trial';
+			
+			 function shuffle(array) {
+			   for (let i = array.length - 1; i > 0; i--) {
+			     const j = Math.floor(Math.random() * (i + 1));
+			     [array[i], array[j]] = [array[j], array[i]];
+			   }
+			   return array;
+			 }
+			
+			 function getDisplayedAnimals() {
+			   let list = [...animals];
+			   if (aksesLevel === 'trial') return shuffle(list).slice(0, 6);
+			   if (aksesLevel === 'basic') return shuffle(list).slice(0, 12);
+			   if (aksesLevel === 'plus') return list.sort((a, b) => a.nama.localeCompare(b.nama));
+			   return [];
+			 }
+			
+			 let displayedAnimals = getDisplayedAnimals();
+			 let quizMode = false;
+			 let currentAnswer = null;
+			
+			 const animalContainer = document.getElementById('animalContainer');
+			 const toggleModeBtn = document.getElementById('toggleModeBtn');
+			 const searchInput = document.getElementById('searchInput');
+			 const filterKategori = document.getElementById('filterKategori');
+			
+			 function renderAnimals(data) {
+			 animalContainer.innerHTML = '';
+			 data.forEach(h => {
+			   const col = document.createElement('div');
+			   col.className = 'col-lg-2 col-md-6 mt-3 mb-4';
+			
+			   const kategoriClass = 
+			 h.kategori.toLowerCase() === 'darat' ? 'category-darat' :
+			 h.kategori.toLowerCase() === 'air' ? 'category-air' :
+			 h.kategori.toLowerCase() === 'udara' ? 'category-udara' :
+			 '';
+			
+			 col.innerHTML = `
+        <div class="animal-card" data-nama="${h.nama}">
+          <div class="tooltip-wrapper" data-tooltip="${h.desk || 'Deskripsi tidak tersedia'}">
+            <img src="${h.img}" class="card-img-top" alt="${h.nama}" />
+          </div>
+          <h6 class="mt-3 fw-bold">${h.nama}</h6>
+          <h6 style="font-size:0.9rem;color:tomato;font-style:italic">(${h['nama-inggris']})</h6>
+          <p class="mt-3 category-badge ${kategoriClass}">${h.kategori}</p>
+        </div>
+      `;
+			
+			   // URL sound benar & salah (ganti kalau mau pakai lokal)
+			   const soundBenar = new Audio('sounds/benar.mp3');
+			   const soundSalah = new Audio('sounds/salah.mp3');
+			   col.querySelector('.animal-card').addEventListener('click', () => {
+			       if (quizMode) {
+			           const selected = h.nama;
+			           if (selected === currentAnswer.nama) {
+			           soundBenar.play();
+			           Swal.fire('🎉 Benar!', `Kamu berhasil menebak suara ${h.nama}!`, 'success').then(() => {
+			               soundBenar.pause();
+			               soundBenar.currentTime = 0;
+			               startQuiz();
+			           });
+			           } else {
+			           soundSalah.play();
+			           Swal.fire('😞 Salah!', `Itu bukan suara ${h.nama}. Coba lagi ya!`, 'error').then(() => {
+			               soundSalah.pause();
+			               soundSalah.currentTime = 0;
+			           });
+			           }
+			       } else {
+			           const audio = new Audio(h.suara);
+			           audio.play().catch(err => {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal Memutar Suara',
+                    text: `Suara hewan ${h.nama} tidak dapat diputar.`,
+                    footer: `<code>${err.message}</code>`
+                  });
+                });
+			       }
+			       });
+			
+			
+			   animalContainer.appendChild(col);
+			 });
+			}
+			
+			function startQuiz() {
+			 quizMode = true;
+			 toggleModeBtn.textContent = '❌ Keluar Mode Kuis';
+			 const quizAnimals = shuffle([...displayedAnimals]);
+			 currentAnswer = quizAnimals[Math.floor(Math.random() * quizAnimals.length)];
+			 const audio = new Audio(currentAnswer.suara);
+			 setTimeout(() => audio.play(), 500);
+			 renderAnimals(quizAnimals);
+			}
+			
+			function exitQuiz() {
+			 quizMode = false;
+			 toggleModeBtn.textContent = '🎮 Mode Kuis';
+			 currentAnswer = null;
+			 renderAnimals(displayedAnimals);
+			}
+			
+			toggleModeBtn.addEventListener('click', () => {
+			 if (!quizMode) {
+			   startQuiz();
+			 } else {
+			   exitQuiz();
+			 }
+			});
+			
+			searchInput.addEventListener('input', () => {
+			 const keyword = searchInput.value.toLowerCase();
+			 const filtered = displayedAnimals.filter(h => h.nama.toLowerCase().includes(keyword));
+			 renderAnimals(filtered);
+			});
+			
+			filterKategori.addEventListener('change', () => {
+			 const selectedKategori = filterKategori.value;
+			 if (selectedKategori === 'semua') {
+			   renderAnimals(displayedAnimals);
+			 } else {
+			   const filtered = displayedAnimals.filter(h => h.kategori.toLowerCase() === selectedKategori.toLowerCase());
+			   renderAnimals(filtered);
+			 }
+			});
+			
+			renderAnimals(displayedAnimals);
+			 
+		</script>
+	</body>
 </html>
