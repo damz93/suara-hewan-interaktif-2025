@@ -378,7 +378,7 @@
 		quizMode = true;
 		toggleModeBtn.textContent = '❌ Keluar Mode Kuis';
 		quizControls.style.display = 'block'; // tampilkan tombol replay
-		const quizAnimals = shuffle([...displayedAnimals]).slice(0, 4); // HANYA 12 HEWAN
+		const quizAnimals = shuffle([...displayedAnimals]).slice(0, 6); // HANYA 12 HEWAN
 		currentAnswer = quizAnimals[Math.floor(Math.random() * quizAnimals.length)];
 		const audio = new Audio(currentAnswer.suara);
 		setTimeout(() => audio.play(), 500);
