@@ -96,7 +96,7 @@
 			animation: bounce 2s infinite;
 			user-select: none;
 			font-weight: 700;
-			margin-bottom: 1.2rem;
+			margin-bottom: 1rem;
 			}
 			.animal-card {
 			background-color: #fff;
@@ -297,15 +297,15 @@
 			       } else {
 			           const audio = new Audio(h.suara);
 			           audio.play().catch(err => {
-                  Swal.fire({
-                    icon: 'error',
-                    title: 'Gagal Memutar Suara',
-                    text: `Suara hewan ${h.nama} tidak dapat diputar.`,
-                    footer: `<code>${err.message}</code>`
-                  });
-                });
+							Swal.fire({
+								icon: 'error',
+								title: 'Gagal Memutar Suara',
+								text: `Suara hewan ${h.nama} tidak dapat diputar.`,
+								footer: `<code>${err.message}</code>`
+							});
+							});
 			       }
-			       });
+			    });
 			
 			
 			   animalContainer.appendChild(col);
