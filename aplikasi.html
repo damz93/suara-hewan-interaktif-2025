@@ -237,7 +237,7 @@
 			 function getDisplayedAnimals() {
 			   let list = [...animals];
 			   if (aksesLevel === 'trial') return shuffle(list).slice(0, 6);
-			   if (aksesLevel === 'basic') return shuffle(list).slice(0, 12);
+			   if (aksesLevel === 'basic') return shuffle(list).slice(0, 18);
 			   if (aksesLevel === 'plus') return list.sort((a, b) => a.nama.localeCompare(b.nama));
 			   return [];
 			 }
