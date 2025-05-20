@@ -224,6 +224,14 @@
       "desk": "Reptil hijau dengan sisik dan ekor panjang."
    },
    {
+      "nama": "Jangkrik",
+      "nama-inggris": "Cricket",
+      "kategori": "Darat",
+      "img": "img/jangkrik.png",
+      "suara": "sounds/jangkrik.mp3",
+      "desk": "Serangga bersayap yang dikenal karena suara nyaring dari gesekan sayapnya."
+   },
+   {
       "nama": "Jerapah",
       "nama-inggris": "Giraffe",
       "kategori": "Darat",
