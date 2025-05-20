@@ -520,6 +520,14 @@
       "desk": "Mamalia domestik penghasil susu."
    },
    {
+      "nama": "Semut",
+      "nama-inggris": "Cow",
+      "kategori": "Darat",
+      "img": "img/semut.png",
+      "suara": "sounds/semut.mp3",
+      "desk": "Serangga kecil hidup berkoloni dengan peran sosial kuat."
+   },
+   {
       "nama": "Tikus",
       "nama-inggris": "Mouse",
       "kategori": "Darat",
