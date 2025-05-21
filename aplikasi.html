@@ -7,181 +7,203 @@
 		<link rel="icon" href="icon.jpg" type="image/png" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 		<style>
 			.tooltip-wrapper {
-			position: relative;
-			display: inline-block;
+				position: relative;
+				display: inline-block;
 			}
 			.tooltip-wrapper:hover::after {
-			content: attr(data-tooltip);
-			position: absolute;
-			top: calc(100% + 5px);
-			left: 50%;
-			transform: translateX(-50%);
-			background: rgba(51, 51, 51, 0.9);
-			color: #fff;
-			padding: 0px 3px;
-			border-radius: 4px;
-			z-index: 30;
-			max-width: 100%;
-			white-space: normal;
-			font-size: 0.75rem;
-			pointer-events: none;
-			text-align: center;
-			opacity: 1;
-			transition: opacity 0.2s ease-in-out;
+				content: attr(data-tooltip);
+				position: absolute;
+				top: calc(100% + 5px);
+				left: 50%;
+				transform: translateX(-50%);
+				background: rgba(51, 51, 51, 0.9);
+				color: #fff;
+				padding: 0px 3px;
+				border-radius: 4px;
+				z-index: 30;
+				max-width: 100%;
+				white-space: normal;
+				font-size: 0.75rem;
+				pointer-events: none;
+				text-align: center;
+				opacity: 1;
+				transition: opacity 0.2s ease-in-out;
 			}
 			.tooltip-wrapper::after {
-			opacity: 0;
-			pointer-events: none;
+				opacity: 0;
+				pointer-events: none;
 			}
 			.tooltip-wrapper:hover::after {
-			opacity: 1;
+				opacity: 1;
 			}
 			body {
-			font-family: 'Poppins', sans-serif;
-			background: linear-gradient(135deg, #ffe3e3, #ffd6a5, #fdffb6, #caffbf);
-			color: #333;
-			min-height: 100vh;
-			margin: 0;
-			padding-bottom: 50px;
+				font-family: 'Poppins', sans-serif;
+				background: linear-gradient(135deg, #ffe3e3, #ffd6a5, #fdffb6, #caffbf);
+				color: #333;
+				min-height: 100vh;
+				margin: 0;
+				padding-bottom: 50px;
 			}
-			/* Menu Sticky */
 			#fixedMenu {
-			width: 100vw;
-			margin: 0;
-			padding-left: 0;
-			padding-right: 0;
-			left: 0;
-			right: 0;
-			z-index: 1030;
-			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+				width: 100vw;
+				margin: 0;
+				padding-left: 0;
+				padding-right: 0;
+				left: 0;
+				right: 0;
+				z-index: 1030;
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 			}
 			#fixedMenu .form-control,
 			#fixedMenu .form-select {
-			border-radius: 25px;
-			padding-left: 1.25rem;
-			padding-right: 1.25rem;
-			font-size: 1rem;
-			transition: border-color 0.3s ease;
-			border: 2px solid #f8b500;
+				border-radius: 25px;
+				padding-left: 1.25rem;
+				padding-right: 1.25rem;
+				font-size: 1rem;
+				transition: border-color 0.3s ease;
+				border: 2px solid #f8b500;
 			}
 			#fixedMenu .form-control:focus,
 			#fixedMenu .form-select:focus {
-			border-color: #e67e00;
-			box-shadow: 0 0 8px #e67e00aa;
-			outline: none;
+				border-color: #e67e00;
+				box-shadow: 0 0 8px #e67e00aa;
+				outline: none;
 			}
 			#toggleModeBtn {
-			border-radius: 25px;
-			background: linear-gradient(45deg, #f8b500, #fceabb);
-			border: none;
-			font-weight: 600;
-			font-size: 1.1rem;
-			transition: background 0.4s ease, transform 0.2s ease;
-			box-shadow: 0 3px 8px rgba(248, 181, 0, 0.5);
+				border-radius: 25px;
+				background: linear-gradient(45deg, #f8b500, #fceabb);
+				border: none;
+				font-weight: 600;
+				font-size: 1.1rem;
+				transition: background 0.4s ease, transform 0.2s ease;
+				box-shadow: 0 3px 8px rgba(248, 181, 0, 0.5);
 			}
 			#toggleModeBtn:hover {
-			background: linear-gradient(45deg, #e67e00, #f8b500);
-			transform: scale(1.05);
-			box-shadow: 0 6px 15px rgba(230, 126, 0, 0.7);
+				background: linear-gradient(45deg, #e67e00, #f8b500);
+				transform: scale(1.05);
+				box-shadow: 0 6px 15px rgba(230, 126, 0, 0.7);
 			}
 			h3.animated-title {
-			font-size: 1.93rem;
-			color: #c4722f;
-			text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-			animation: bounce 2s infinite;
-			user-select: none;
-			font-weight: 700;
-			margin-bottom: 1rem;
+				font-size: 1.93rem;
+				color: #c4722f;
+				text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+				animation: bounce 2s infinite;
+				user-select: none;
+				font-weight: 700;
+				margin-bottom: 1rem;
 			}
 			.animal-card {
-			background-color: #fff;
-			border-radius: 20px;
-			box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-			overflow: hidden;
-			cursor: pointer;
-			transition: transform 0.3s ease, box-shadow 0.3s ease;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			padding-bottom: 1rem;
+				background-color: #fff;
+				border-radius: 20px;
+				box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+				overflow: hidden;
+				cursor: pointer;
+				transition: transform 0.3s ease, box-shadow 0.3s ease;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				padding-bottom: 1rem;
 			}
 			.animal-card:hover {
-			transform: scale(1.05); /* Dikurangi untuk mencegah tumpang tindih */
-			box-shadow: 0 10px 20px rgba(0,0,0,0.25);
-			z-index: 5;
+				transform: scale(1.05);
+				box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+				z-index: 5;
 			}
 			.card-img-top {
-			width: 100%;
-			height: auto;
-			max-height: 150px;
-			object-fit: contain;
-			object-position: center;
-			padding: 15px 10px 0 10px;
-			border-bottom: 2px solid #f8b500;
-			border-radius: 20px 20px 0 0;
-			background: #f5ecc0;
-			position: relative;
+				width: 100%;
+				height: auto;
+				max-height: 150px;
+				object-fit: contain;
+				object-position: center;
+				padding: 15px 10px 0 10px;
+				border-bottom: 2px solid #f8b500;
+				border-radius: 20px 20px 0 0;
+				background: #f5ecc0;
+				position: relative;
 			}
 			.animal-card p.category-badge {
-			font-weight: 600;
-			font-size: 0.9rem;
-			margin-top: 0.5rem;
-			padding: 4px 12px;
-			border-radius: 20px;
-			color: #fff;
-			user-select: none;
-			width: fit-content;
+				font-weight: 600;
+				font-size: 0.9rem;
+				margin-top: 0.5rem;
+				padding: 4px 12px;
+				border-radius: 20px;
+				color: #fff;
+				user-select: none;
+				width: fit-content;
 			}
 			.category-darat {
-			background-color: #27ae60;
+				background-color: #27ae60;
 			}
 			.category-air {
-			background-color: #2980b9;
+				background-color: #2980b9;
 			}
 			.category-udara {
-			background-color: #6b7280; /* Abu-abu untuk kontras lebih baik */
-			text-shadow: 0 0 2px rgba(0, 0, 0, 0.3); /* Meningkatkan keterbacaan */
+				background-color: #6b7280;
+				text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
 			}
 			.category-unknown {
-			background-color: #9ca3af; /* Abu-abu netral untuk kategori tidak valid */
+				background-color: #9ca3af;
+			}
+			#scoreDisplay {
+				background: #fff;
+				border-radius: 15px;
+				padding: 10px 20px;
+				box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+				display: inline-block;
+			}
+			#scoreDisplay h5 {
+				margin: 0;
+				font-size: 1.1rem;
+				color: #c4722f;
+				font-weight: 600;
+			}
+			#resultContainer {
+				display: none;
+				background: #fff;
+				border-radius: 15px;
+				padding: 20px;
+				box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+				text-align: center;
+				margin: 20px auto;
+				max-width: 400px;
 			}
 			@media (max-width: 991.98px) {
-			#fixedMenu {
-			margin-bottom: 150px;
-			padding: 10px 16px;
-			}
-			#toggleModeBtn {
-			font-size: 1rem;
-			padding: 8px 0;
-			}
-			.card-img-top {
-			max-height: 130px; /* Mengganti height: 130px */
-			}
-			.animal-card:hover {
-			transform: scale(1.03); /* Skala lebih kecil untuk mobile */
-			}
+				#fixedMenu {
+					margin-bottom: 150px;
+					padding: 10px 16px;
+				}
+				#toggleModeBtn {
+					font-size: 1rem;
+					padding: 8px 0;
+				}
+				.card-img-top {
+					max-height: 130px;
+				}
+				.animal-card:hover {
+					transform: scale(1.03);
+				}
 			}
 			@keyframes bounce {
-			0%, 100% { transform: translateY(0); }
-			50% { transform: translateY(-10px); }
+				0%, 100% { transform: translateY(0); }
+				50% { transform: translateY(-10px); }
 			}
 			@media (max-width: 768px) {
-			.main-content {
-			margin-top: 250px !important; /* lebih besar dari tinggi menu sticky di mobile */
-			}
+				.main-content {
+					margin-top: 250px !important;
+				}
 			}
 			@media (min-width: 769px) {
-			.main-content {
-			margin-top: 150px !important; /* default margin untuk laptop/desktop */
-			}
+				.main-content {
+					margin-top: 150px !important;
+				}
 			}
 		</style>
 	</head>
 	<body>
-		<!-- Menu Sticky (HARUS DI LUAR container utama!) -->
 		<div id="fixedMenu" class="container-fluid fixed-top bg-light py-3">
 			<h3 class="text-center fw-bold animated-title">🐾 Suara Hewan Interaktif</h3>
 			<div class="row g-2 justify-content-center align-items-center">
@@ -201,265 +223,419 @@
 				</div>
 			</div>
 		</div>
-		<!-- Konten utama -->
 		<div class="container py-4 main-content">
 			<div class="text-center" id="quizControls" style="display:none;">
 				<button id="replaySoundBtn" class="btn btn-primary mb-3">🔁 Putar Ulang</button>
+				<div id="scoreDisplay" class="mb-3">
+					<h5>Pertanyaan: <span id="questionCount">0</span>/10 | Skor: <span id="scoreValue">0</span> | Benar: <span id="correctCount">0</span> | Salah: <span id="incorrectCount">0</span></h5>
+				</div>
 			</div>
-			<!-- Konten lain masuk sini -->
+			<div id="resultContainer" style="display:none; background: #f0f8ff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; max-width: 400px; margin: auto; font-family: 'Poppins', sans-serif;">
+  
+  <!-- Logo -->
+				<img src="bg.jpg" alt="Logo" style="width: 100px; margin-bottom: 15px;">
+
+				<!-- Waktu -->
+				<p style="margin: 0; font-size: 14px; color: #666;">
+					<span id="currentDateTime"></span>
+				</p>
+
+				<h4 style="margin-top: 10px; color: #333;">🎉 Hasil Kuis 🎉</h4>
+				
+				<p>Nama: <strong><span id="playerNameResult"></span></strong></p>
+				<p>Skor: <strong><span id="finalScore"></span></strong></p>
+				<p>
+					✅ Benar: <strong><span id="finalCorrect"></span></strong> | ❌ Salah: <strong><span id="finalIncorrect"></span></strong>
+				</p>
+				</div>
+
+				<script>
+				// Tampilkan tanggal dan waktu saat ini
+				function updateDateTime() {
+					const now = new Date();
+					const formatter = new Intl.DateTimeFormat('id-ID', {
+					dateStyle: 'full',
+					timeStyle: 'short',
+					timeZone: 'Asia/Makassar'
+					});
+					document.getElementById('currentDateTime').textContent = formatter.format(now);
+				}
+
+				updateDateTime(); // panggil saat halaman ditampilkan
+				</script>
+
 			<div id="animalContainer" class="row"></div>
 		</div>
 		<script>
-		let animals = [];
+			let animals = [];
+			let score = 0;
+			let correctCount = 0;
+			let incorrectCount = 0;
+			let questionCount = 0;
+			let quizMode = false;
+			let currentAnswer = null;
+			let displayedAnimals = [];
 
-
-	fetch('animals.json')
-		.then(res => res.json())
-		.then(data => {
-			animals = data;
-			displayedAnimals = getDisplayedAnimals(); // panggil ulang setelah data masuk
-			renderAnimals(displayedAnimals); // tampilkan ke halaman
-		})
-		.catch(err => {
-			console.error('Gagal memuat data hewan:', err);
-		});
-
-	const aksesLevel = localStorage.getItem('aksesLevel');
-
-	function shuffle(array) {
-		for (let i = array.length - 1; i > 0; i--) {
-			const j = Math.floor(Math.random() * (i + 1));
-			[array[i], array[j]] = [array[j], array[i]];
-		}
-		return array;
-	}
-
-	function getDisplayedAnimals() {
-		let list = [...animals];
-		if (aksesLevel === 'trial') {
-			Swal.fire({
-				title: '🐾 Versi Trial Aktif',
-				html: `
-					<p style="font-size:0.7rem">Kamu hanya mendapatkan 4 hewan random untuk dicoba.</p>
-					<hr>
-					<p style="font-size:0.8rem"><strong>Ingin lebih banyak hewan?</strong></p>
-					<div style="align-items: center;">
-						<a href="http://lynk.id/dedy-a-muzawwir/l8rz6eodle2r" 
-							target="_blank" 
-							title="Buka Akses 18 Suara Hewan untuk Belajar Interaktif" 
-							class="swal2-confirm swal2-styled" 
-							style="border-radius:13px;background-color:#007bff; padding: 9px;color:white; text-decoration:none;font-size:0.8rem;width: 200px;text-align: center;margin-right: 5px;">
-							🔓 Beli Paket Basic
-						</a>
-						<a href="http://lynk.id/dedy-a-muzawwir/3x9jyddqy27p" 
-							target="_blank" 
-							title="Suara Hewan Terlengkap untuk Aktivitas Edukatif" 
-							class="swal2-confirm swal2-styled" 
-							style="border-radius:13px;background-color:#28a745; padding: 10px;color:white; text-decoration:none;font-size:0.8rem;width: 200px;text-align: center;margin-left: 5px;">
-							🚀 Beli Paket Plus
-						</a>
-					</div>
-					<hr>
-				`,
-					icon: 'warning',
-					confirmButtonText: 'Lanjut Coba Trial',
-					confirmButtonColor: 'grey',
-					allowOutsideClick: false,
-					allowEscapeKey: false
+			fetch('animals.json')
+				.then(res => res.json())
+				.then(data => {
+					animals = data;
+					displayedAnimals = getDisplayedAnimals();
+					renderAnimals(displayedAnimals);
+				})
+				.catch(err => {
+					console.error('Gagal memuat data hewan:', err);
+					Swal.fire({
+						icon: 'error',
+						title: 'Gagal Memuat Data',
+						text: 'Tidak dapat memuat data hewan. Silakan coba lagi nanti.',
+						footer: `<code>${err.message}</code>`
+					});
 				});
 
+			const aksesLevel = localStorage.getItem('aksesLevel');
 
-				// handle klik tombol trial
-				document.addEventListener('click', function(e) {
-				if (e.target && e.target.id === 'lanjutTrialBtn') {
-					Swal.close(); // tutup manual
-					// jalankan logic trial lanjut
-					jalankanTrial(); // ganti dengan fungsi milikmu
+			function shuffle(array) {
+				for (let i = array.length - 1; i > 0; i--) {
+					const j = Math.floor(Math.random() * (i + 1));
+					[array[i], array[j]] = [array[j], array[i]];
 				}
-		});
+				return array;
+			}
+
+			function getDisplayedAnimals() {
+				let list = [...animals];
+				if (aksesLevel === 'trial') {
+					Swal.fire({
+						title: '🐾 Versi Trial Aktif',
+						html: `
+							<p style="font-size:0.7rem">Kamu hanya mendapatkan 4 hewan random untuk dicoba.</p>
+							<hr>
+							<p style="font-size:0.8rem"><strong>Ingin lebih banyak hewan?</strong></p>
+							<div style="align-items: center;">
+								<a href="http://lynk.id/dedy-a-muzawwir/l8rz6eodle2r" 
+									target="_blank" 
+									title="Buka Akses 18 Suara Hewan untuk Belajar Interaktif" 
+									class="swal2-confirm swal2-styled" 
+									style="border-radius:13px;background-color:#007bff; padding: 9px;color:white; text-decoration:none;font-size:0.8rem;width: 200px;text-align: center;margin-right: 5px;">
+									🔓 Beli Paket Basic
+								</a>
+								<a href="http://lynk.id/dedy-a-muzawwir/3x9jyddqy27p" 
+									target="_blank" 
+									title="Suara Hewan Terlengkap untuk Aktivitas Edukatif" 
+									class="swal2-confirm swal2-styled" 
+									style="border-radius:13px;background-color:#28a745; padding: 10px;color:white; text-decoration:none;font-size:0.8rem;width: 200px;text-align: center;margin-left: 5px;">
+									🚀 Beli Paket Plus
+								</a>
+							</div>
+							<hr>
+						`,
+						icon: 'warning',
+						confirmButtonText: 'Lanjut Coba Trial',
+						confirmButtonColor: 'grey',
+						allowOutsideClick: false,
+						allowEscapeKey: false
+					});
+					return shuffle(list).slice(0, 4);
+				}
+				if (aksesLevel === 'basic') return shuffle(list).slice(0, 18);
+				if (aksesLevel === 'plus') return list.sort((a, b) => a.nama.localeCompare(b.nama));
+				else {
+					Swal.fire({
+						icon: 'warning',
+						title: 'Akses Tidak Dikenal',
+						text: 'Kami akan mengembalikan kamu ke halaman sebelumnya.',
+						showConfirmButton: false,
+						timer: 2000
+					});
+					setTimeout(() => {
+						history.back();
+					}, 2000);
+					return [];
+				}
+			}
+
+			const animalContainer = document.getElementById('animalContainer');
+			const toggleModeBtn = document.getElementById('toggleModeBtn');
+			const searchInput = document.getElementById('searchInput');
+			const filterKategori = document.getElementById('filterKategori');
+			const replaySoundBtn = document.getElementById('replaySoundBtn');
+			const quizControls = document.getElementById('quizControls');
+			const resultContainer = document.getElementById('resultContainer');
+
+			function resetScore() {
+				score = 0;
+				correctCount = 0;
+				incorrectCount = 0;
+				questionCount = 0;
+				updateScoreDisplay();
+			}
+
+			function updateScoreDisplay() {
+				document.getElementById('scoreValue').textContent = score;
+				document.getElementById('correctCount').textContent = correctCount;
+				document.getElementById('incorrectCount').textContent = incorrectCount;
+				document.getElementById('questionCount').textContent = questionCount;
+			}
+
+			function showResult() {
+				const playerName = localStorage.getItem('playerName') || 'Pemain';
+				resultContainer.style.display = 'block';
+				document.getElementById('playerNameResult').textContent = playerName;
+				document.getElementById('finalScore').textContent = score;
+				document.getElementById('finalCorrect').textContent = correctCount;
+				document.getElementById('finalIncorrect').textContent = incorrectCount;
+				Swal.fire({
+					title: `Selamat, ${playerName}!`,
+					html: `
+						<p>Kuis selesai!</p>
+						<p>Skor: ${score}</p>
+						<p>Benar: ${correctCount} | Salah: ${incorrectCount}</p>
+					`,
+					icon: 'success',
+					confirmButtonText: 'Selesai',
+					showDenyButton: true,
+					denyButtonText: 'Share ke WhatsApp',
+					showCancelButton: true,
+					cancelButtonText: 'Unduh & Share Gambar'
+				}).then((result) => {
+					if (result.isDenied) {
+						const message = ` Halo! Saya *${playerName}* baru saja menyelesaikan kuis *Suara Hewan Interaktif* di Zoo-Ara! 🐾\n\n✅ Skor: *${score}*\n✅ Benar: *${correctCount}*\n❌ Salah: *${incorrectCount}*\n\nKamu juga bisa ikutan seru-seruan tebak suara hewan di sini:\n👉 https://damz93.github.io/suara-hewan-interaktif-2025/ 🐈🐒🐔`;
+						const waUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+						window.open(waUrl, '_blank');
+					} else if (result.isDismissed && result.dismiss === Swal.DismissReason.cancel) {
+							html2canvas(resultContainer).then(canvas => {
+								canvas.toBlob(blob => {
+									const file = new File([blob], 'hasil-kuis-zooara.png', { type: 'image/png' });
+
+									if (navigator.canShare && navigator.canShare({ files: [file] })) {
+										navigator.share({
+											files: [file],
+											title: 'Hasil Kuis Zoo-Ara 🐾',
+											text: `Yuk coba tebak suara hewan di Zoo-Ara! 🎉`,
+										}).catch((err) => {
+											console.warn('Share dibatalkan:', err);
+										});
+									} else {
+										// Fallback: download saja
+										const link = document.createElement('a');
+										link.download = 'hasil-kuis-zooara.png';
+										link.href = URL.createObjectURL(file);
+										link.click();
+
+										Swal.fire({
+											icon: 'info',
+											title: 'Gambar Diunduh',
+											text: 'Kamu bisa unggah gambar hasil ini ke status WhatsApp-mu secara manual ya 😊',
+										});
+									}
+								}, 'image/png');
+							}).catch(err => {
+								Swal.fire({
+									icon: 'error',
+									title: 'Gagal Mengunduh atau Share',
+									text: 'Tidak dapat memproses gambar.',
+									footer: `<code>${err.message}</code>`
+								});
+							});
+						}
 
 
+					exitQuiz();
+				});
+			}
 
-			return shuffle(list).slice(0, 4);
-		}
+			function renderAnimals(data) {
+				animalContainer.innerHTML = '';
+				data.forEach(h => {
+					const col = document.createElement('div');
+					col.className = 'col-6 col-sm-3 col-md-4 col-lg-2 mb-4';
+					const kategoriClass =
+						h.kategori.toLowerCase() === 'darat' ? 'category-darat' :
+						h.kategori.toLowerCase() === 'air' ? 'category-air' :
+						h.kategori.toLowerCase() === 'udara' ? 'category-udara' :
+						'category-unknown';
+					col.innerHTML = `
+						<div class="animal-card" data-nama="${h.nama}">
+							<div class="tooltip-wrapper" data-tooltip="${h.desk || 'Deskripsi tidak tersedia'}">
+								<img src="${h.img}" class="card-img-top" alt="${h.nama}" />
+							</div>
+							<h6 class="mt-3 fw-bold">${h.nama}</h6>
+							<h6 style="font-size:0.9rem;color:tomato;font-style:italic">(${h['nama-inggris']})</h6>
+							<p class="mt-3 category-badge ${kategoriClass}">${h.kategori}</p>
+						</div>
+					`;
+					const soundBenar = new Audio('sounds/benar.mp3');
+					const soundSalah = new Audio('sounds/salah.mp3');
+					col.querySelector('.animal-card').addEventListener('click', () => {
+						if (quizMode) {
+							const selected = h.nama;
+							questionCount++;
+							updateScoreDisplay();
+							if (selected === currentAnswer.nama) {
+								score += 10;
+								correctCount++;
+								soundBenar.play().catch(err => {
+									console.error('Gagal memutar suara benar:', err);
+								});
+								Swal.fire({
+									title: '🎉 Benar!',
+									html: `Kamu berhasil menebak suara ${h.nama}!<br>Skor: ${score}<br>Benar: ${correctCount} | Salah: ${incorrectCount}`,
+									icon: 'success',
+									confirmButtonText: 'Lanjut'
+								}).then(() => {
+									soundBenar.pause();
+									soundBenar.currentTime = 0;
+									if (questionCount >= 10) {
+										showResult();
+									} else {
+										startQuiz();
+									}
+								});
+							} else {
+								incorrectCount++;
+								soundSalah.play().catch(err => {
+									console.error('Gagal memutar suara salah:', err);
+								});
+								Swal.fire({
+									title: '😞 Salah!',
+									html: `Itu bukan suara ${h.nama}. Coba lagi ya!<br>Skor: ${score}<br>Benar: ${correctCount} | Salah: ${incorrectCount}`,
+									icon: 'error',
+									confirmButtonText: 'Lanjut'
+								}).then(() => {
+									soundSalah.pause();
+									soundSalah.currentTime = 0;
+									if (questionCount >= 10) {
+										showResult();
+									} else {
+										startQuiz();
+									}
+								});
+							}
+							updateScoreDisplay();
+						} else {
+							const audio = new Audio(h.suara);
+							audio.play().catch(err => {
+								Swal.fire({
+									icon: 'error',
+									title: 'Gagal Memutar Suara',
+									text: `Suara hewan ${h.nama} tidak dapat diputar.`,
+									footer: `<code>${err.message}</code>`
+								});
+							});
+						}
+					});
+					animalContainer.appendChild(col);
+				});
+			}
 
-		if (aksesLevel === 'basic') return shuffle(list).slice(0, 18);
+			function startQuiz() {
+				if (!quizMode) return;
+				const quizAnimals = shuffle([...displayedAnimals]).slice(0, 6);
+				currentAnswer = quizAnimals[Math.floor(Math.random() * quizAnimals.length)];
+				const audio = new Audio(currentAnswer.suara);
+				audio.play().catch(err => {
+					console.error('Gagal memutar suara kuis:', err);
+					Swal.fire({
+						icon: 'error',
+						title: 'Gagal Memutar Suara',
+						text: `Tidak dapat memutar suara kuis. Tetap lanjutkan?`,
+						confirmButtonText: 'Lanjut'
+					});
+				});
+				renderAnimals(quizAnimals);
+			}
 
-		if (aksesLevel === 'plus') return list.sort((a, b) => a.nama.localeCompare(b.nama));
-
-		// Jika aksesLevel tidak dikenal, kembali ke halaman sebelumnya
-		else {
-			Swal.fire({
-				icon: 'warning',
-				title: 'Akses Tidak Dikenal',
-				text: 'Kami akan mengembalikan kamu ke halaman sebelumnya.',
-				showConfirmButton: false,
-				timer: 2000
-			});
-			setTimeout(() => {
-				history.back();
-			}, 2000);
-			return [];
-		}
-
-	}
-
-	let displayedAnimals = getDisplayedAnimals();
-	let quizMode = false;
-	let currentAnswer = null;
-
-	const animalContainer = document.getElementById('animalContainer');
-	const toggleModeBtn = document.getElementById('toggleModeBtn');
-	const searchInput = document.getElementById('searchInput');
-	const filterKategori = document.getElementById('filterKategori');
-
-	function renderAnimals(data) {
-		animalContainer.innerHTML = '';
-		data.forEach(h => {
-			const col = document.createElement('div');
-			col.className = 'col-6 col-sm-3 col-md-4 col-lg-2 mb-4';
-
-			// col-6 col-sm-6 col-md-4 col-lg-3
-
-			const kategoriClass =
-				h.kategori.toLowerCase() === 'darat' ? 'category-darat' :
-				h.kategori.toLowerCase() === 'air' ? 'category-air' :
-				h.kategori.toLowerCase() === 'udara' ? 'category-udara' :
-				'';
-
-			col.innerHTML = `
-					<div class="animal-card" data-nama="${h.nama}">
-					<div class="tooltip-wrapper" data-tooltip="${h.desk || 'Deskripsi tidak tersedia'}">
-						<img src="${h.img}" class="card-img-top" alt="${h.nama}" />
-					</div>
-					<h6 class="mt-3 fw-bold">${h.nama}</h6>
-					<h6 style="font-size:0.9rem;color:tomato;font-style:italic">(${h['nama-inggris']})</h6>
-					<p class="mt-3 category-badge ${kategoriClass}">${h.kategori}</p>
-					</div>
-				`;
-
-			// URL sound benar & salah (ganti kalau mau pakai lokal)
-			const soundBenar = new Audio('sounds/benar.mp3');
-			const soundSalah = new Audio('sounds/salah.mp3');
-			col.querySelector('.animal-card').addEventListener('click', () => {
-				if (quizMode) {
-					const selected = h.nama;
-					if (selected === currentAnswer.nama) {
-						soundBenar.play();
-						Swal.fire('🎉 Benar!', `Kamu berhasil menebak suara ${h.nama}!`, 'success').then(() => {
-							soundBenar.pause();
-							soundBenar.currentTime = 0;
-							startQuiz();
-						});
-					} else {
-						soundSalah.play();
-						Swal.fire('😞 Salah!', `Itu bukan suara ${h.nama}. Coba lagi ya!`, 'error').then(() => {
-							soundSalah.pause();
-							soundSalah.currentTime = 0;
-						});
+			function enterQuizMode() {
+				const savedName = localStorage.getItem('playerName') || '';
+				Swal.fire({
+					title: 'Masukkan Nama',
+					input: 'text',
+					inputValue: savedName,
+					inputPlaceholder: 'Ketik nama kamu...',
+					showCancelButton: true,
+					confirmButtonText: 'Mulai Kuis',
+					cancelButtonText: 'Batal',
+					inputValidator: (value) => {
+						if (!value) {
+							return 'Nama tidak boleh kosong!';
+						}
 					}
+				}).then((result) => {
+					if (result.isConfirmed) {
+						localStorage.setItem('playerName', result.value);
+						quizMode = true;
+						toggleModeBtn.textContent = '❌ Keluar Mode Kuis';
+						quizControls.style.display = 'block';
+						resultContainer.style.display = 'none';
+						resetScore();
+						startQuiz();
+					}
+				});
+			}
+
+			function exitQuiz() {
+				quizMode = false;
+				toggleModeBtn.textContent = '🎮 Mode Kuis';
+				quizControls.style.display = 'none';
+				resultContainer.style.display = 'none';
+				currentAnswer = null;
+				resetScore();
+				renderAnimals(displayedAnimals);
+			}
+
+			toggleModeBtn.addEventListener('click', () => {
+				if (!quizMode) {
+					enterQuizMode();
 				} else {
-					const audio = new Audio(h.suara);
+					Swal.fire({
+						title: 'Keluar dari Mode Kuis?',
+						text: 'Apakah kamu yakin ingin keluar dari mode kuis?',
+						icon: 'warning',
+						showCancelButton: true,
+						confirmButtonText: 'Ya, keluar',
+						cancelButtonText: 'Batal'
+					}).then((result) => {
+						if (result.isConfirmed) {
+							exitQuiz();
+						}
+					});
+				}
+			});
+
+			searchInput.addEventListener('input', () => {
+				if (quizMode) return;
+				const keyword = searchInput.value.toLowerCase();
+				const filtered = displayedAnimals.filter(h => h.nama.toLowerCase().includes(keyword));
+				renderAnimals(filtered);
+			});
+
+			filterKategori.addEventListener('change', () => {
+				if (quizMode) return;
+				const selectedKategori = filterKategori.value;
+				if (selectedKategori === 'semua') {
+					renderAnimals(displayedAnimals);
+				} else {
+					const filtered = displayedAnimals.filter(h => h.kategori.toLowerCase() === selectedKategori.toLowerCase());
+					renderAnimals(filtered);
+				}
+			});
+
+			replaySoundBtn.addEventListener('click', () => {
+				if (quizMode && currentAnswer) {
+					const audio = new Audio(currentAnswer.suara);
 					audio.play().catch(err => {
 						Swal.fire({
 							icon: 'error',
 							title: 'Gagal Memutar Suara',
-							text: `Suara hewan ${h.nama} tidak dapat diputar.`,
+							text: `Tidak dapat memutar suara ulang.`,
 							footer: `<code>${err.message}</code>`
 						});
 					});
 				}
 			});
 
-
-			animalContainer.appendChild(col);
-		});
-	}
-
-	function startQuiz() {
-		quizMode = true;
-		toggleModeBtn.textContent = '❌ Keluar Mode Kuis';
-		quizControls.style.display = 'block'; // tampilkan tombol replay
-		const quizAnimals = shuffle([...displayedAnimals]).slice(0, 6); // HANYA 12 HEWAN
-		currentAnswer = quizAnimals[Math.floor(Math.random() * quizAnimals.length)];
-		const audio = new Audio(currentAnswer.suara);
-		setTimeout(() => audio.play(), 500);
-		renderAnimals(quizAnimals);
-	}
-
-
-	function exitQuiz() {
-		quizMode = false;
-		toggleModeBtn.textContent = '🎮 Mode Kuis';
-		quizControls.style.display = 'none'; // sembunyikan tombol replay
-		currentAnswer = null;
-		renderAnimals(displayedAnimals);
-	}
-
-	toggleModeBtn.addEventListener('click', () => {
-		if (!quizMode) {
-			Swal.fire({
-			title: '🎮 Mode Kuis Aktif!',
-			text: 'Tebak suara hewan dengan memilih gambar yang sesuai.',
-			icon: 'info',
-			confirmButtonText: 'Mulai'
-			}).then((result) => {
-			if (result.isConfirmed) {
-				startQuiz();
-			}
-			});
-		} else {
-			Swal.fire({
-			title: 'Keluar dari Mode Kuis?',
-			text: 'Apakah kamu yakin ingin keluar dari mode kuis?',
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonText: 'Ya, keluar',
-			cancelButtonText: 'Batal'
-			}).then((result) => {
-			if (result.isConfirmed) {
-				exitQuiz();
-			}
-			});
-		}
-		});
-
-
-	searchInput.addEventListener('input', () => {
-		const keyword = searchInput.value.toLowerCase();
-		const filtered = displayedAnimals.filter(h => h.nama.toLowerCase().includes(keyword));
-		renderAnimals(filtered);
-	});
-
-	filterKategori.addEventListener('change', () => {
-		const selectedKategori = filterKategori.value;
-		if (selectedKategori === 'semua') {
 			renderAnimals(displayedAnimals);
-		} else {
-			const filtered = displayedAnimals.filter(h => h.kategori.toLowerCase() === selectedKategori.toLowerCase());
-			renderAnimals(filtered);
-		}
-	});
-
-	renderAnimals(displayedAnimals);
-	const replaySoundBtn = document.getElementById('replaySoundBtn');
-	const quizControls = document.getElementById('quizControls');
-
-	replaySoundBtn.addEventListener('click', () => {
-		if (quizMode && currentAnswer) {
-			const audio = new Audio(currentAnswer.suara);
-			audio.play().catch(err => {
-				Swal.fire({
-					icon: 'error',
-					title: 'Gagal Memutar Suara',
-					text: `Tidak dapat memutar suara ulang.`,
-					footer: `<code>${err.message}</code>`
-				});
-			});
-		}
-	});
-
-
-	</script>
+		</script>
 	</body>
 </html>
