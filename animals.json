@@ -73,7 +73,7 @@
    },
    {
       "nama": "Berang-berang",
-      "nama-inggris": "Beaver",
+      "nama-inggris": "Otter",
       "kategori": "Darat",
       "img": "img/berang.png",
       "suara": "sounds/berangberang.mp3",
@@ -145,7 +145,7 @@
    },
    {
       "nama": "Burung Kakatua",
-      "nama-inggris": "Cockatoo",
+      "nama-inggris": "Parrots",
       "kategori": "Udara",
       "img": "img/burung-kakatua.png",
       "suara": "sounds/burung-kakatua.mp3",
@@ -229,7 +229,7 @@
       "kategori": "Darat",
       "img": "img/jangkrik.png",
       "suara": "sounds/jangkrik.mp3",
-      "desk": "Serangga bersayap yang dikenal karena suara nyaring dari gesekan sayapnya."
+      "desk": "Serangga bersayap yang dikenal karena suara nyaring."
    },
    {
       "nama": "Jerapah",
