@@ -120,6 +120,14 @@
       "desk": "Burung eksotis dengan bulu warna-warni."
    },
    {
+      "nama": "Burung Beo",
+      "nama-inggris": "Parrot",
+      "kategori": "Udara",
+      "img": "img/burung-beo.png",
+      "suara": "sounds/burung-beo.mp3",
+      "desk": "Burung cerdas yang bisa menirukan suara manusia."
+   },
+   {
       "nama": "Burung Gagak",
       "nama-inggris": "Crow",
       "kategori": "Udara",
@@ -145,7 +153,7 @@
    },
    {
       "nama": "Burung Kakatua",
-      "nama-inggris": "Parrots",
+      "nama-inggris": "Cockatoo",
       "kategori": "Udara",
       "img": "img/burung-kakatua.png",
       "suara": "sounds/burung-kakatua.mp3",
@@ -158,6 +166,14 @@
       "img": "img/burung-kolibri.png",
       "suara": "sounds/kolibri.mp3",
       "desk": "Burung kecil dengan sayap cepat dan warna cerah."
+   },
+   {
+      "nama": "Burung Perkutut",
+      "nama-inggris": "Turtle Dove",
+      "kategori": "Udara",
+      "img": "img/burung-perkutut.png",
+      "suara": "sounds/burung-perkutut.mp3",
+      "desk": "Burung kecil bersuara lembut dan merdu."
    },
    {
       "nama": "Cicak",
@@ -414,6 +430,14 @@
       "img": "img/macan-tutul.png",
       "suara": "sounds/macantutul.mp3",
       "desk": "Kucing besar dengan corak tutul."
+   },
+   {
+      "nama": "Marmut",
+      "nama-inggris": "Guinea Pig",
+      "kategori": "Darat",
+      "img": "img/marmut.png",
+      "suara": "sounds/marmut.mp3",
+      "desk": "Mamalia kecil berbulu lembut yang suka berkelompok."
    },
    {
       "nama": "Merpati",

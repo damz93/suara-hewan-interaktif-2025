@@ -405,32 +405,32 @@
 						window.open(waUrl, '_blank');
 					} else if (result.isDismissed && result.dismiss === Swal.DismissReason.cancel) {
 							html2canvas(resultContainer).then(canvas => {
-								canvas.toBlob(blob => {
-									const file = new File([blob], 'hasil-kuis-zooara.png', { type: 'image/png' });
+							canvas.toBlob(blob => {
+								const file = new File([blob], 'hasil-kuis-zooara.png', { type: 'image/png' });
 
-									if (navigator.canShare && navigator.canShare({ files: [file] })) {
-										navigator.share({
-											files: [file],
-											title: 'Hasil Kuis Zoo-Ara 🐾',
-											text: `Yuk coba tebak suara hewan di Zoo-Ara! 🎉 https://damz93.github.io/suara-hewan-interaktif-2025`,
-										}).catch((err) => {
-											console.warn('Share dibatalkan:', err);
-										});
-									} else {
-										// Fallback: download saja
-										const link = document.createElement('a');
-										link.download = 'hasil-kuis-zooara.png';
-										link.href = URL.createObjectURL(file);
-										link.click();
+								if (navigator.canShare && navigator.canShare({ files: [file] })) {
+									navigator.share({
+										files: [file],
+										title: 'Hasil Kuis Zoo-Ara 🐾',
+										text: `Yuk coba tebak suara hewan di Zoo-Ara! 🎉 https://damz93.github.io/suara-hewan-interaktif-2025`,
+									}).catch((err) => {
+										console.warn('Share dibatalkan:', err);
+									});
+								} else {
+									// Fallback manual download + instruksi
+									const link = document.createElement('a');
+									link.download = 'hasil-kuis-zooara.png';
+									link.href = URL.createObjectURL(file);
+									link.click();
 
-										Swal.fire({
-											icon: 'info',
-											title: 'Gambar Diunduh',
-											text: 'Kamu bisa unggah gambar hasil ini ke status WhatsApp-mu secara manual ya 😊',
-										});
-									}
-								}, 'image/png');
-							}).catch(err => {
+									Swal.fire({
+										icon: 'info',
+										title: 'Gambar Diunduh',
+										text: 'Kamu bisa unggah gambar hasil ini ke Status WhatsApp-mu secara manual 😊',
+									});
+								}
+							}, 'image/png');
+						}).catch(err => {
 								Swal.fire({
 									icon: 'error',
 									title: 'Gagal Mengunduh atau Share',
