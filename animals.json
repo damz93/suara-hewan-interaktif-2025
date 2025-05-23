@@ -560,6 +560,14 @@
       "desk": "Serangga kecil hidup berkoloni dengan peran sosial kuat."
    },
    {
+      "nama": "Tupai",
+      "nama-inggris": "Squirrel",
+      "kategori": "Darat",
+      "img": "img/tupai.png",
+      "suara": "sounds/tupai.mp3",
+      "desk": "Mamalia kecil pemanjat pohon yang suka makan biji dan buah."
+   },
+   {
       "nama": "Tikus",
       "nama-inggris": "Mouse",
       "kategori": "Darat",
